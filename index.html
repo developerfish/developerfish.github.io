@@ -1,16 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Hello World</title>
-<style>
-body {
-  text-align: center;
-}
-</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <style type="text/css">
+        * {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
+<a id="ios" href="https://developeryu.com/" target="_blank">ios唤起地址</a><br><br>
+<button id="iosButton">ios使用iframe</button><br>
+<a href="https://apps.apple.com/cn/app/canadia-bank/id1554821237?l=en-GB" target="_blank">ios应用地址</a><br>
+<p>-------------</p>
+<a id="android" href="canadia://com.canadiabank.mobileapp.android/main?id=6398cc431c9011eead1d0021f66f8167" target="_blank">安卓唤起地址</a><br><br>
+<button id="androidButton">android使用iframe</button><br>
+<a href="https://play.google.com/store/apps/details?id=com.canadiabank.mobileapp.android" target="_blank">安卓应用地址</a><br>
+<p>-------------</p>
+<div id="test">执行日志：</div>
+<div id="box"></div>
+<script type="text/javascript">
+  var iosURL = 'https://developeryu.com/'
+  var iosStore = 'https://apps.apple.com/cn/app/canadia-bank/id1554821237?l=en-GB'
+  var androidURL = 'canadia://com.canadiabank.mobileapp.android/main?id=6398cc431c9011eead1d0021f66f8167'
+  var androidStore = 'https://play.google.com/store/apps/details?id=com.canadiabank.mobileapp.android'
 
-<h1>Hello World</h1>
 
+  var test = document.getElementById('test')
+  test.onclick = function () {
+    test.innerHTML = 'test'
+  }
+
+  function addLog(text) {
+    var para = document.createElement('p');
+    para.innerHTML = text
+    test.appendChild(para);
+  }
+
+  var timeing = null
+  document.getElementById('android').onclick = function () {
+    addLog('唤起Android app应用')
+    timeing = setTimeout(() => {
+      addLog('唤起失败执行定时跳转应用商城')
+    }, 2000)
+  }
+
+  document.getElementById('ios').onclick = function () {
+    addLog('唤起IOS app应用')
+    timeing = setTimeout(() => {
+      addLog('唤起失败执行定时跳转应用商城')
+    }, 2000)
+  }
+
+
+  function openApp(deepLink, appStore) {
+      addLog('唤起 app应用:' + deepLink)
+      var ifm = document.createElement('iframe');
+      ifm.style.display = 'none';
+      ifm.src = deepLink;
+      document.getElementById('box').appendChild(ifm);
+      timeing = setTimeout(() => {
+          addLog('唤起失败执行定时跳转应用商城:' + appStore)
+          window.location = appStore
+      }, 1000)
+  }
+
+  document.getElementById('iosButton').onclick = function () {
+      openApp(iosURL, iosStore)
+  }
+
+  document.getElementById('androidButton').onclick = function () {
+      openApp(androidURL, androidStore)
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    console.log('触发visibilitychange==============================》')
+
+    if (document.hidden) {
+      console.log('后台=================================》')
+      addLog('唤起成功，清除定时跳转应用商城任务')
+      clearTimeout(timeing)
+    } else {
+      console.log('回来=================================》')
+      addLog('又切回来了')
+    }
+  });
+
+  var ua = navigator.userAgent
+  // 是否 ios 系统
+  if(/(iPhone|iPad|iPod|iOS)/i.test(ua)){  // 是否 ios 系统
+      openApp(iosURL, iosStore)
+  } else if(/Android/i.test(ua)) {  // 是否 安卓 系统
+      openApp(androidURL, androidStore)
+  } else {
+      addLog('未知的设备类型')
+  }
+</script>
 </body>
 </html>

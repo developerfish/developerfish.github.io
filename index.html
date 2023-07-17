@@ -12,7 +12,6 @@
     </style>
 </head>
 <body>
-<p>-------------</p>
 <div id="test">执行日志：</div>
 <div id="box"></div>
 <script type="text/javascript">
@@ -23,9 +22,6 @@
 
 
   var test = document.getElementById('test')
-  test.onclick = function () {
-    test.innerHTML = 'test'
-  }
 
   function addLog(text) {
     var para = document.createElement('p');
@@ -34,22 +30,9 @@
   }
 
   var timeing = null
-  /*document.getElementById('android').onclick = function () {
-    addLog('唤起Android app应用')
-    timeing = setTimeout(() => {
-      addLog('唤起失败执行定时跳转应用商城')
-    }, 2000)
-  }*/
-
-  /*document.getElementById('ios').onclick = function () {
-    addLog('唤起IOS app应用')
-    timeing = setTimeout(() => {
-      addLog('唤起失败执行定时跳转应用商城')
-    }, 2000)
-  }*/
 
 
-  function openApp(deepLink, appStore) {
+  function openIOS(deepLink, appStore) {
     addLog('唤起 app应用:' + deepLink)
     // var ifm = document.createElement('iframe');
     // ifm.style.display = 'none';
@@ -60,14 +43,6 @@
       window.location = appStore
     }, 1000)
   }
-
-  /*document.getElementById('iosButton').onclick = function () {
-    openApp(iosURL, iosStore)
-  }
-
-  document.getElementById('androidButton').onclick = function () {
-    openApp(androidURL, androidStore)
-  }*/
 
   document.addEventListener('visibilitychange', () => {
     console.log('触发visibilitychange==============================》')
@@ -82,17 +57,21 @@
     }
   });
 
-  function openApp2(deepLink, appStore) {
+  function openAndroid(deepLink, appStore) {
     addLog('唤起 app应用:' + deepLink)
     window.location = deepLink
+    timeing = setTimeout(() => {
+      addLog('唤起失败执行定时跳转应用商城:' + appStore)
+      window.location = appStore
+    }, 2000)
   }
 
   var ua = navigator.userAgent
   // 是否 ios 系统
   if(/(iPhone|iPad|iPod|iOS)/i.test(ua)){  // 是否 ios 系统
-    openApp(iosURL, iosStore)
+    openIOS(iosURL, iosStore)
   } else if(/Android/i.test(ua)) {  // 是否 安卓 系统
-    openApp2(androidURL, androidStore)
+    openAndroid(androidURL, androidStore)
     // document.getElementById('androidButton').click()
   } else {
     addLog('未知的设备类型')

@@ -12,12 +12,12 @@
     </style>
 </head>
 <body>
-<div id="test">Execution log:</div>
+<div id="test">执行日志：</div>
 <div id="box"></div>
 <script type="text/javascript">
-  var iosURL = 'https://developeryu.com/'
+  var iosURL = 'https://developeryu.com/?id=6398cc431c9011eead1d0021f66f8167'
   var iosStore = 'https://apps.apple.com/cn/app/canadia-bank/id1554821237?l=en-GB'
-  var androidURL = 'canadia://com.canadiabank.mobileapp.android/main?id=6398cc431c9011eead1d0021f66f8167'
+  var androidURL = 'canadia://com.canadiabank.mobileapp.android/main?id=648c50d81c9011eead1d0021f66f8167'
   var androidStore = 'https://play.google.com/store/apps/details?id=com.canadiabank.mobileapp.android'
 
 
@@ -33,35 +33,35 @@
 
 
   function openIOS(deepLink, appStore) {
-    addLog('open app:' + deepLink)
+    addLog('唤起 app应用:' + deepLink)
     // var ifm = document.createElement('iframe');
     // ifm.style.display = 'none';
     // ifm.src = deepLink;
     // document.getElementById('box').appendChild(ifm);
     timeing = setTimeout(() => {
-      addLog('Failed to wake up, execute timing to jump to the application store:' + appStore)
+      addLog('唤起失败执行定时跳转应用商城:' + appStore)
       window.location = appStore
     }, 1000)
   }
 
   document.addEventListener('visibilitychange', () => {
-    console.log('trigger visibilitychange==============================>')
+    console.log('触发visibilitychange==============================》')
 
     if (document.hidden) {
-      console.log('back-end=================================>')
-      addLog('Evoked successfully, cleared the timed jump to the app store task')
+      console.log('后台=================================》')
+      addLog('唤起成功，清除定时跳转应用商城任务')
       clearTimeout(timeing)
     } else {
-      console.log('backed=================================>')
-      addLog('cut back again')
+      console.log('回来=================================》')
+      addLog('又切回来了')
     }
   });
 
   function openAndroid(deepLink, appStore) {
-    addLog('open app:' + deepLink)
+    addLog('唤起 app应用:' + deepLink)
     window.location = deepLink
     timeing = setTimeout(() => {
-      addLog('Failed to wake up, execute timing to jump to the application store:' + appStore)
+      addLog('唤起失败执行定时跳转应用商城:' + appStore)
       window.location = appStore
     }, 2000)
   }
@@ -74,7 +74,7 @@
     openAndroid(androidURL, androidStore)
     // document.getElementById('androidButton').click()
   } else {
-    addLog('unknown device type')
+    addLog('未知的设备类型')
   }
 </script>
 </body>

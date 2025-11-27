@@ -1,11 +1,20 @@
 {
-    "applinks": {
-        "apps": [],
-        "details": [
-            {
-                "appID": "2PC8J9MPF4.com.mbank.canadias",
-                "paths": [ "*" ]
-            }
-        ]
-    }
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "332PHK9E36.com.sdebank.emobilebank.enterprise",
+        "paths": ["*"]
+      },
+      {
+        "appID": "332PHK9E36.com.sdebank.emobilebankforzs.enterprise",
+        "paths": ["*"]
+      },
+      {
+        "appID": "332PHK9E36.com.sdebank.emobilebankforfc.enterprise",
+        "paths": ["*"]
+      }
+    ]
+  }
 }
+

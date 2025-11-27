@@ -13,7 +13,11 @@
       {
         "appID": "332PHK9E36.com.sdebank.emobilebankforfc.enterprise",
         "paths": ["*"]
-      }
+      },
+ {
+        "appID": "QPEK8VA7L9.com.sdebank.emobilebank.enterprise",
+        "paths": ["*"]
+      },
     ]
   }
 }

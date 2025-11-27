@@ -17,7 +17,7 @@
      {
         "appID": "QPEK8VA7L9.com.sdebank.emobilebank.enterprise",
         "paths": ["*"]
-      },
+      }
     ]
   }
 }
